@@ -22,3 +22,22 @@
 | Column name | Data type |
 |:------------|:-----------|
 | name        | string     |
+
+
+## Deploying on Heroku
+
+1. Login
+ - Login using the command
+ ```heroku login ```
+
+
+2. Create an app on heroku using
+  ```heroku create```
+
+
+3. Send codes to heroku from main branch using
+  ```git push heroku main ```
+
+
+4. Run migrations on heroku using
+  ```heroku run:detached rails db:migrate```
