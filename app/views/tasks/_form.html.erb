@@ -29,7 +29,11 @@
   <div class="field">
     <%= form.label :status %>
     <%= form.select :status, [ 'Not started', 'In progress', 'Complete' ], :prompt => 'Select Status' %>
-    <%= form.select :status, [ 'High', 'Middle', 'Low' ], :prompt => 'Select Priority' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :priority %>
+    <%= form.select :priority, [ 'High', 'Middle', 'Low' ], :prompt => 'Select Priority' %>
   </div>
 
   <div class="actions">
