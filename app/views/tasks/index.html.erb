@@ -1,12 +1,24 @@
 <p id="notice"><%= notice %></p>
-
+<%= paginate @tasks %>
 <h1>Tasks</h1>
+<%= search_form_for @q do |f| %>
+
+  <%= f.label :title_cont, 'Title' %>
+  <%= f.search_field :title_cont, placeholder: 'Title' %>
+
+  <%= f.label :status_cont, 'Status' %>
+  <%= f.select :status_cont, [ 'Not started', 'In progress', 'Complete' ], :prompt => 'Select Status' %>
+
+  <%= f.submit %>
+<% end %>
 
 <table>
   <thead>
     <tr>
       <th>Title</th>
       <th>Content</th>
+      <th><%= sort_link(@q, :deadline, 'Deadline', default_order: :desc) %></th>
+      <th>Status</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +28,8 @@
       <tr>
         <td><%= task.title %></td>
         <td><%= task.content %></td>
+        <td><%= task.deadline %></td>
+        <td><%= task.status %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
