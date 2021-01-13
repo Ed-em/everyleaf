@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     @q = Task.ransack(params[:q])
-    @tasks = @q.result.page(params[:page]).per(10)
+    @tasks = @q.result.page(params[:page]).per(2)
   end
 
   # GET /tasks/1

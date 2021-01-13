@@ -34,7 +34,7 @@ RSpec.describe 'Task management function', type: :system do
     context 'When you search by title' do
       it "Filter by tasks that include search keywords" do
         visit tasks_path
-        fill_in 'Title', with: 'title1'
+        fill_in 'Search Title here', with: 'title1'
         click_on 'search'
         expect(page).to have_content 'title1'
       end
@@ -50,7 +50,7 @@ RSpec.describe 'Task management function', type: :system do
     context 'When you search by title and status' do
       it "Tasks that include the search keyword in the title and exactly match the status are narrowed down" do
           visit tasks_path
-          fill_in 'Title', with: 'title1'
+          fill_in 'Search Title here', with: 'title1'
           select 'Complete'
           click_on 'search'
           expect(page).to have_content 'title1'
