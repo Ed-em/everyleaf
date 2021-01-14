@@ -1,10 +1,13 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :current_user
+  before_action :authenticate_user
+  before_action :logged_in?
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @q = Task.ransack(params[:q])
+    @q = Task.where(user_id: current_user.id).ransack(params[:q])
     @tasks = @q.result.page(params[:page]).per(2)
   end
 
@@ -20,6 +23,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    
   end
 
   # POST /tasks
