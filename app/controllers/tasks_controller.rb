@@ -7,8 +7,9 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @q = Task.where(user_id: current_user.id).ransack(params[:q])
-    @tasks = @q.result.page(params[:page]).per(2)
+    @q = current_user.tasks.ransack(params[:q])
+    @tasks = @q.result(distinct: true).page(params[:page]).per(2)
+
   end
 
   # GET /tasks/1
@@ -23,13 +24,18 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    
+    if current_user.id != @task.user_id
+    flash[:notice] = "Not Allowed!"
+    redirect_to feeds_path(session[:task_user])
+    return
+  end
   end
 
   # POST /tasks
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
+    @task.user_id = current_user.id
 
     respond_to do |format|
       if @task.save

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  
+  PER = 6
+
 
     def new
       @user = User.new
@@ -8,17 +9,22 @@ class UsersController < ApplicationController
     def create
       @user = User.new(user_params)
       if @user.save
-        redirect_to new_session_path
+        session[:user_id] = @user.id
+        flash[:success] = 'User was successfully created'
+        redirect_to user_path(@user.id)
       else
         render :new
       end
     end
     def show
-      @user = User.find(params[:id])
+      @user = current_user
+      redirect_to tasks_path if @user.id !=  params[:id].to_i
     end
+
     def edit
       @user = User.find(params[:id])
     end
+
     def update
       respond_to do |format|
         if @user.update(user_params)
