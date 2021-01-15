@@ -40,11 +40,15 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    if @user.destroy
+    user = User.find(params[:id])
+    if (current_user == user) && (current_user.admin?)
+    flash[:error] = "You cannot delete own admin account!"
+    redirect_to admin_users_path
+    elsif @user.destroy
       flash[:success] = "user deleted!"
       redirect_to admin_users_path
     else
-      flash[:danger] = "user not deleted"
+      flash[:danger] = "user not deleted!"
       redirect_to admin_users_path
     end
   end
@@ -56,7 +60,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def  if_not_admin
-    redirect_to  root_path  unless  current_user.admin?
+    redirect_to  tasks_path(current_user.id)  unless  current_user.admin?
   end
 
   def user_params
