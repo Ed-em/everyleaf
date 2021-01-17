@@ -44,7 +44,8 @@ before_action :authenticate_user, only: [:show]
       @user = User.find(params[:id])
     end
     def require_owner
-    if current_user != @user
+    if current_user != @user && !current_user.is_admin?
+      flash[:alert] = "You can only manage your own account"
       redirect_to tasks_path(@user.id)
     end
   end
