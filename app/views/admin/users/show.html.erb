@@ -15,6 +15,10 @@
         <td><%= @user.email %></td>
       </tr>
       <tr>
+        <th>Number of tasks</th>
+        <td><%= @user.tasks.count %></td>
+      </tr>
+      <tr>
         <th>User admin priviledges</th>
         <td><%= @user.admin? ? "Yes":"No" %></td>
       </tr>
