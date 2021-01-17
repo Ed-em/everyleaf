@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  PER = 6
+before_action :set_user, only: [:show, :edit, :update, :destroy]
+before_action :require_owner, except: [:new, :create]
+before_action :authenticate_user, only: [:show]
 
 
     def new
@@ -17,8 +18,7 @@ class UsersController < ApplicationController
       end
     end
     def show
-      @user = current_user
-      redirect_to tasks_path if @user.id !=  params[:id].to_i
+      @user = User.find(params[:id])
     end
 
     def edit
@@ -43,4 +43,9 @@ class UsersController < ApplicationController
     def set_user
       @user = User.find(params[:id])
     end
+    def require_owner
+    if current_user != @user
+      redirect_to tasks_path(@user.id)
+    end
+  end
 end

@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       if current_user.admin?
          redirect_to admin_users_path
       else
-      redirect_to tasks_path(user.id)
+      redirect_to user_path(user.id)
       end
     else
       flash.now[:danger] = 'login failed'

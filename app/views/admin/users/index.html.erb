@@ -11,7 +11,7 @@
       <th>Username</th>
       <th>Email</th>
       <th>User admin priviledges </th>
-      <th>Users Tasks</th>
+      <th></th>
       <th colspan="4"></th>
    </tr>
   </thead>
@@ -24,8 +24,8 @@
 
       <td><%= user.admin? ? "Yes":"No" %></td>
       <td><%= link_to 'Show', admin_user_path(user.id), class: "btn btn-outline-primary" %></td>
-      <td><%= link_to 'Edit', edit_admin_user_path(user.id), data: { confirm: 'Are you sure?' }  , class: "btn btn-outline-success" %></td>
-      <td><%= button_to 'Delete', admin_user_path(user.id), data: { confirm: 'Are you sure?' }, :method=>:delete, :class=>:destroy, class:"btn btn-outline-danger" %>
+      <td><%= link_to 'Edit', edit_admin_user_path(user.id), data: { confirm: 'Are you sure?' }, class: "btn btn-outline-success" %></td>
+      <td><%= button_to 'Delete', admin_user_path(user.id), data: { confirm: 'Are you sure?' }, :method=>:delete, :class=>:destroy %>
     </tr>
     <% end %>
   </tbody>

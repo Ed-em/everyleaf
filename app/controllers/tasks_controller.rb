@@ -10,11 +10,17 @@ class TasksController < ApplicationController
     @q = current_user.tasks.includes(:user).ransack(params[:q])
     @tasks = @q.result(distinct: true).page(params[:page]).per(2)
 
+
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    if current_user.id != @task.user_id
+    flash[:notice] = "Not Allowed!"
+    redirect_to tasks_path(session[:task_user])
+    return
+  end
   end
 
   # GET /tasks/new
@@ -26,7 +32,7 @@ class TasksController < ApplicationController
   def edit
     if current_user.id != @task.user_id
     flash[:notice] = "Not Allowed!"
-    redirect_to feeds_path(session[:task_user])
+    redirect_to tasks_path(session[:task_user])
     return
   end
   end
@@ -76,6 +82,13 @@ class TasksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = current_user.tasks.find(params[:id])
+    end
+
+    def authenticate_user
+      if @current_user == nil
+        flash[:notice] = t('notice.login_needed')
+        redirect_to new_session_path
+      end
     end
 
     # Only allow a list of trusted parameters through.

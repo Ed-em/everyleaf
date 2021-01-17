@@ -13,8 +13,8 @@ RSpec.describe 'Task management function', type: :system do
     FactoryBot.create(:task, title: "title1", content: "content1", deadline: "2021/1/1", status:"Complete", priority: "Low", user_id: @user.id)
     FactoryBot.create(:task, title: "title2", content: "content2", deadline: "2021/1/1", status:"Complete", priority: "Low", user_id: @user.id)
     FactoryBot.create(:task, title: "title3", content: "content3", deadline: "2021/1/1", status:"Complete", priority: "Low", user_id: @user.id)
-
   end
+  
   describe 'New creation function' do
     context 'When creating a new task' do
       it 'Should display created task' do
