@@ -50,7 +50,7 @@ describe 'User test', type: :system do
                                  password: 'password',
                                  password_confirmation: 'password')
         visit user_path(id: sue.id)
-        expect(page).to have_content("Task")
+        expect(page).to have_content("Tasks List")
       end
     end
   end
