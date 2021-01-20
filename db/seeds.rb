@@ -6,7 +6,47 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 User.create!( name:   "admin" ,
-                email: "admin@gmail.com" ,
-                password:   "12345677" ,
-                password_confirmation: "12345677" ,
-                admin: true )
+              email: "admin@gmail.com" ,
+              password:   "12345677" ,
+              password_confirmation: "12345677" ,
+              admin: true )
+
+
+User.create!( name:   "hey" ,
+              email: "hey@gmail.com" ,
+              password:   "12345678" ,
+              password_confirmation: "12345678" ,
+              admin: false )
+
+User.create!( name:   "hey1" ,
+              email: "hey1@gmail.com" ,
+              password:   "12345678" ,
+              password_confirmation: "12345678" ,
+              admin: false )
+
+User.create!( name:   "hey2" ,
+              email: "hey2@gmail.com" ,
+              password:   "12345678" ,
+              password_confirmation: "12345678" ,
+              admin: false )
+
+tasks = ['Go Shopping', 'Work', 'Meet', 'Code']
+tasks.each do |task|
+  Task.create!( title: task,
+                content: 'Description of Task',
+                deadline: '2020-11-06',
+                status: 'Incompleted',
+                priority: 'Medium',
+                user_id: 1)
+end
+
+labels = ['Routine', 'Work Related', 'Health', 'Social']
+labels.each do |label|
+  Label.create!(name: label,
+                user_id: 1)
+end
+
+4.times do
+  Labelling.create!(label_id: Faker::Number.between(from: 1, to: 4),
+                    task_id: Faker::Number.between(from: 1, to: 4))
+end
