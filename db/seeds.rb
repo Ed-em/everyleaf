@@ -5,30 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create!( name:   "admin" ,
-              email: "admin@gmail.com" ,
-              password:   "12345677" ,
-              password_confirmation: "12345677" ,
-              admin: true )
 
-
-User.create!( name:   "hey" ,
-              email: "hey@gmail.com" ,
-              password:   "12345678" ,
-              password_confirmation: "12345678" ,
-              admin: false )
-
-User.create!( name:   "hey1" ,
-              email: "hey1@gmail.com" ,
-              password:   "12345678" ,
-              password_confirmation: "12345678" ,
-              admin: false )
-
-User.create!( name:   "hey2" ,
-              email: "hey2@gmail.com" ,
-              password:   "12345678" ,
-              password_confirmation: "12345678" ,
-              admin: false )
 
 tasks = ['Go Shopping', 'Work', 'Meet', 'Code']
 tasks.each do |task|
