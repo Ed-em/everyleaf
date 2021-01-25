@@ -11,7 +11,11 @@
      <div class="col-lg-4">
        <%= f.search_field :title_cont, placeholder: 'Search Title here', class: "form-control" %>
      </div>
-     <div class="col-lg-4">
+     <div class="col-lg-1">
+
+     </div>
+     <div class="col-lg-3">
+      <%= f.select :labels_id_eq_any, options_from_collection_for_select(current_user.labels.all, :id, :name), :prompt => "Select Labels", :id => 'label_ids' %>
      </div>
      <div class="col-lg-4">
        <div class="input-group">
@@ -35,6 +39,7 @@
         <tr>
           <th>Title</th>
           <th>Content</th>
+          <th>Label</th>
           <th><%= sort_link(@q, :deadline, 'Deadline', default_order: :desc) %></th>
           <th><%= sort_link(@q, :priority, 'Priority', default_order: :desc) %></th>
           <th>Status</th>
@@ -47,12 +52,16 @@
           <tr>
             <td><%= task.title %></td>
             <td><%= task.content %></td>
+            <td><% task.labels.each do |label| %>
+              <li><%= label.name %></li>
+            <% end %></td>
             <td><%= task.deadline %></td>
             <td><%= task.priority %></td>
             <td><%= task.status %></td>
             <td><%= link_to 'Show', task, class: "btn btn-outline-primary" %></td>
             <td><%= link_to 'Edit', edit_task_path(task), data: { confirm: 'Are you sure' }   , class: "btn btn-outline-success" %></td>
             <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %></td>
+
           </tr>
         <% end %>
       </tbody>

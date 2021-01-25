@@ -36,6 +36,11 @@
     <%= form.select :priority, [ 'High', 'Middle', 'Low' ], :prompt => 'Select Priority' %>
   </div>
 
+  <div class="field">
+    <%= form.label :label %>
+    <%= form.collection_select(:label_ids, current_user.labels.all, :id, :name, {prompt: "Select Labels"}, {multiple: true, class: "custom-select"} ) %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
